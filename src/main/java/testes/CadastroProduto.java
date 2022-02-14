@@ -1,6 +1,9 @@
 package testes;
 
+import dao.ProdutoDAO;
+import modelo.Categoria;
 import modelo.Produto;
+import util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,15 +12,12 @@ import java.math.BigDecimal;
 
 public class CadastroProduto {
 
+
     public static void main(String[] args) {
-        Produto celular = new Produto();
+        Produto celular = new Produto("S22", "Smartphone Top", new BigDecimal(2800), Categoria.CELULARES);
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoDAO dao = new ProdutoDAO(em);
 
-        celular.setNome("Samsung M21S");
-        celular.setDescricao("Intermediário");
-        celular.setPreco(new BigDecimal(1200));
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-        EntityManager em =  factory.createEntityManager();
         em.getTransaction().begin();
         em.persist(celular);
         em.getTransaction().commit();
