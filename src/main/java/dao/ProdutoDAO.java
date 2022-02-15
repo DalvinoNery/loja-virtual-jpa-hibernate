@@ -8,7 +8,7 @@ public class ProdutoDAO {
 
     private EntityManager em;
 
-    public ProdutoDAO(EntityManager manager){
+    public ProdutoDAO(EntityManager em){
         this.em =em;
     }
 

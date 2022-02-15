@@ -1,5 +1,6 @@
 package testes;
 
+import dao.CategoriaDAO;
 import dao.ProdutoDAO;
 import modelo.Categoria;
 import modelo.Produto;
@@ -14,12 +15,19 @@ public class CadastroProduto {
 
 
     public static void main(String[] args) {
-        Produto celular = new Produto("S22", "Smartphone Top", new BigDecimal(2800), Categoria.CELULARES);
+        Categoria celulares = new Categoria("celulares");
+
+        Produto celular = new Produto("S22", "Smartphone Top", new BigDecimal(2800), celulares);
         EntityManager em = JPAUtil.getEntityManager();
-        ProdutoDAO dao = new ProdutoDAO(em);
+
+        ProdutoDAO produtoDAO = new ProdutoDAO(em);
+        CategoriaDAO categoriaDAO = new CategoriaDAO(em);
 
         em.getTransaction().begin();
-        em.persist(celular);
+
+        categoriaDAO.cadastrar(celulares);
+        produtoDAO.cadastrar(celular);
+
         em.getTransaction().commit();
         em.close();
     }
