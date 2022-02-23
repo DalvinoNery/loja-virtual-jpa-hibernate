@@ -15,18 +15,23 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "valor_total")
     private BigDecimal valorTotal;
+    @Column(name = "data_pedido")
     private LocalDate dataPedido = LocalDate.now();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> listaPedidos = new ArrayList<>();
 
     /*Boa prática, criar no modelo criar um método para relacionar os dois lados do relacionamento manytomany*/
     public void adicionarItem(ItemPedido itemPedido){
         itemPedido.setPedido(this);
         this.listaPedidos.add(itemPedido);
+    }
+
+    public Pedido() {
     }
 
     public Pedido(Cliente cliente) {

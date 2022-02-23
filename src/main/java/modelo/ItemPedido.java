@@ -10,19 +10,19 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "preco_unitario")
     private BigDecimal precoUnitatio;
     private Integer quantidade;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     private Pedido pedido;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     private Produto produto;
 
     public ItemPedido() {
     }
 
-    public ItemPedido(Long id, Integer quantidade, Pedido pedido, Produto produto) {
-        this.id = id;
+    public ItemPedido(Integer quantidade, Pedido pedido, Produto produto) {
         this.quantidade = quantidade;
         this.pedido = pedido;
         this.precoUnitatio = pedido.getValorTotal();
