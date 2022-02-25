@@ -19,9 +19,6 @@ public class TesteCriteria {
 
         produtoDAO.buscarPorParametrosCriteria("LG K51", null, null);
 
-
-
-
     }
 
     private static void popularBancoDados() {
