@@ -4,6 +4,7 @@ import modelo.Pedido;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public class PedidoDAO {
@@ -25,6 +26,11 @@ public class PedidoDAO {
     public List<Pedido> listar(){
         String jpql  ="SELECT p FROM Pedido p";
         return em.createQuery(jpql, Pedido.class).getResultList();
+    }
+
+    public BigDecimal valorTotalVendido(){
+        String jpql  ="SELECT SUM(p.valorTotal) FROM Pedido p";
+        return em.createQuery(jpql, BigDecimal.class).getSingleResult();
     }
 
 }

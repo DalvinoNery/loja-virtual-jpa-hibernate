@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Categoria {
 
     @EmbeddedId
+    @Column(length = 64)
     private CategoriaId id;
 
     public Categoria() {
@@ -19,6 +20,6 @@ public class Categoria {
     public String getNome() {
         return this.id.getNome();
     }
-
+    
 }
 
